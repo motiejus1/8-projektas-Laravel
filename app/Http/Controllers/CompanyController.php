@@ -75,7 +75,7 @@ class CompanyController extends Controller
 
         //puslapiavimas
         $companies = Company::orderBy( $collumnName, $sortby)->paginate(15);
-        return view('company.index', ['companies' => $companies]);
+        return view('company.index', ['companies' => $companies, 'collumnName' => $collumnName, 'sortby' => $sortby]);
     }
 
     /**

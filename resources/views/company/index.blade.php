@@ -5,16 +5,43 @@
     <form action="{{route('company.index')}}" method="GET">
         @csrf
         <select name="collumnname">
-            <option value="id">ID</option>
-            <option value="title">Title</option>
-            <option value="description">Description</option>
-            <option value="type_id">Type</option>
+
+
+            @if ($collumnName == 'id')
+                <option value="id" selected>ID</option>
+            @else
+                <option value="id">ID</option>
+            @endif
+
+
+            @if ($collumnName == 'title')
+             <option value="title" selected>Title</option>
+            @else
+                <option value="title">Title</option>
+            @endif
+
+            @if ($collumnName == 'description')
+                <option value="description" selected>Description</option>
+            @else
+                <option value="description">Description</option>
+            @endif
+
+            @if ($collumnName == 'type_id')
+                <option value="type_id" selected>Type</option>
+            @else
+                <option value="type_id">Type</option>
+            @endif
 
         </select>
 
         <select name="sortby">
-            <option value="asc">ASC</option>
-            <option value="desc">DESC</option>
+            @if ($sortby == "asc")
+                <option value="asc" selected>ASC</option>
+                <option value="desc">DESC</option>
+            @else
+                <option value="asc">ASC</option>
+                <option value="desc" selected>DESC</option>
+            @endif
         </select>
 
         <button type="submit">SORT</button>
