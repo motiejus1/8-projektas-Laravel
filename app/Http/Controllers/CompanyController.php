@@ -12,7 +12,7 @@ class CompanyController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //numatytasis rikiavimas yra pagal id stulpeli nuo maziausio iki didziausio('asc')
         // id - desc/asc
@@ -23,8 +23,9 @@ class CompanyController extends Controller
         // $companies = Company::all();
 
         //isrikitiuo pagal id stulpeli desc
+
         //1.
-        //  $companies = Company::orderBy('title', 'desc')->get();
+        //  $companies = Company::orderBy('id', 'desc')->get();
 
         // SELECT * FROM companies
         //WHERE 1
@@ -33,12 +34,16 @@ class CompanyController extends Controller
         //2.
         // true - mazejimo tvarka
         // false - didejimo tvarka
-        $companies = Company::all()->sortBy('title', SORT_REGULAR, true);
+        // $companies = Company::all()->sortBy('id', SORT_REGULAR, true);
         // SELECT * FROM companies
         // Kompanijos yra paverciamos i kolekcija/masyva
         //IR jau masyvas yra isriuokiuojamas
 
-
+        //3.sort ir sortDesc
+        // sort rikiuoja pagal id didejimoTvarka
+        // $companies = Company::all()->sort();
+        // sortDesc rikiuoja pagal id mazejimo TVarka
+        // $companies = Company::all()->sortDesc();
 
         //kolekcija tas pats asociatyvus objektu masyvas, kuri galima filtruoti ir rikiuoti
 
@@ -46,6 +51,30 @@ class CompanyController extends Controller
         // WHERE(filtravimas)
         // ORDER BY(rikiavimas) stulpelis ASC/DESC
 
+        //Duomenu lentele
+        //Turejome rikiavimo forma, stulpelio pagal kuri rikiuosim, rikiavimo kryptis
+        //GET metodu
+
+        // SELECT * FROM companies
+        // WHERE 1
+        //ORDERBY $collumnName $sortby
+
+        // tuos 2 kintamuosius is nuorodos pasiimti per GET?
+
+        // $_GET/$_POST => $request
+
+        $collumnName = $request->collumnname; // ''
+        $sortby = $request->sortby; // ''
+
+        if(!$collumnName && !$sortby ) {
+            $collumnName = 'id';
+            $sortby = 'asc';
+        }
+
+        // $companies = Company::orderBy( $collumnName, $sortby)->get();
+
+        //puslapiavimas
+        $companies = Company::orderBy( $collumnName, $sortby)->paginate(15);
         return view('company.index', ['companies' => $companies]);
     }
 
@@ -114,4 +143,5 @@ class CompanyController extends Controller
     {
         //
     }
+
 }

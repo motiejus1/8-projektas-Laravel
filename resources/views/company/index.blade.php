@@ -2,6 +2,24 @@
 
 @section('content')
 <div class="container">
+    <form action="{{route('company.index')}}" method="GET">
+        @csrf
+        <select name="collumnname">
+            <option value="id">ID</option>
+            <option value="title">Title</option>
+            <option value="description">Description</option>
+            <option value="type_id">Type</option>
+
+        </select>
+
+        <select name="sortby">
+            <option value="asc">ASC</option>
+            <option value="desc">DESC</option>
+        </select>
+
+        <button type="submit">SORT</button>
+
+    </form>
     <table class="table table-striped">
         <tr>
             <th>ID</th>
@@ -18,5 +36,9 @@
             </tr>
         @endforeach
     </table>
+
+    {{-- {{ $companies->links() }} --}}
+
+    {!! $companies->appends(Request::except('page'))->render() !!}
 </div>
 @endsection
