@@ -20,6 +20,7 @@ Route::get('/', function () {
 Route::prefix('companies')->group(function () {
 
     Route::get('','CompanyController@index')->name('company.index');
+    Route::get('search', 'CompanyController@search')->name('company.search');
     // Route::get('create', 'BookController@create')->name('book.create');
     // Route::post('store', 'BookController@store')->name('book.store');
     // Route::get('edit/{book}', 'BookController@edit')->name('book.edit');

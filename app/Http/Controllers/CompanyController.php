@@ -145,4 +145,66 @@ class CompanyController extends Controller
         //
     }
 
+    //susikurti paieska
+    //controlleryje galime kurti savo funkcijas
+
+    public function search(Request $request) {
+
+        // $companies = Company::paginate(15);
+        //Company::all()
+
+        //SELECT * FROM companies
+        //WHERE 1 //filtravimas
+
+        //Company::orderBy('id', 'desc')->get();
+        //SELECT * FROM companies
+        //WHERE type_id = 5 //filtravimas
+        //ORDER BY companies.id DESC
+
+
+        // atfiltruoti kompanijas pagal type_id 6
+
+        //1. tiek is DB puses dirbt
+        // $companies = Company::where("type_id", 6)->get();
+
+        //SELECT * FROM companies
+        //WHERE type_id = 6
+
+        //2. Pacios kolekcijos puse
+        //  $companies = Company::all()->where("type_id",">", 6);
+
+         //where("type_id",6) -> WHERE type_id = 6
+        // where("type_id",">", 6) -> WHERE type_id > 6
+        // where("type_id","<", 6) -> WHERE type_id < 6
+        // where("type_id",">=", 6) -> WHERE type_id >= 6
+        //where("type_id","<=", 6) -> WHERE type_id <= 6
+        // where("type_id","!=", 6) -> WHERE type_id != 6
+
+        // WHERE type_id > 16 AND type_id < 150
+        // $companies = Company::all()->where("type_id",">=", 16)->where("type_id","<=", 150);
+
+        //WHERE type_id = 151 OR type_id = 152
+
+        // $companies = Company::query()->where("type_id", 151)->orWhere("type_id", 152)->get();
+
+
+        //SELECT * FROM companies
+        //WHERE title LIKE %tekstas%
+
+        $search = $request->search;
+
+
+        //WHERE title LIKE $search OR description LIKE $search
+        $companies = Company::query()->sortable()->where('title', 'LIKE', "%{$search}%")->orWhere('description', 'LIKE', "%{$search}%")->paginate(5);
+
+        // SELECT * FROM companies WHERE 1
+        //isideda kolekcija
+        //kolekcija yra filtruojama
+
+
+
+
+        return view("company.search",['companies'=> $companies]);
+    }
+
 }
