@@ -6,7 +6,6 @@
         @csrf
         <select name="collumnname">
 
-
             @if ($collumnName == 'id')
                 <option value="id" selected>ID</option>
             @else

@@ -14,7 +14,9 @@ class TypeController extends Controller
      */
     public function index()
     {
-        //
+        // sortbale - neegizstuojanti, ir potencialiai raudonai
+        $types = Type::sortable()->paginate(15);
+        return view('type.index', ['types'=> $types]);
     }
 
     /**

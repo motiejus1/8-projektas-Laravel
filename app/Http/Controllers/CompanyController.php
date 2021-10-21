@@ -28,18 +28,19 @@ class CompanyController extends Controller
         //  $companies = Company::orderBy('id', 'desc')->get();
 
         // SELECT * FROM companies
-        //WHERE 1
-        //ORDER BY companies.id desc
+        // WHERE 1
+        // ORDER BY companies.id desc
 
         //2.
         // true - mazejimo tvarka
         // false - didejimo tvarka
         // $companies = Company::all()->sortBy('id', SORT_REGULAR, true);
         // SELECT * FROM companies
+
         // Kompanijos yra paverciamos i kolekcija/masyva
         //IR jau masyvas yra isriuokiuojamas
 
-        //3.sort ir sortDesc
+        //3. sort ir sortDesc
         // sort rikiuoja pagal id didejimoTvarka
         // $companies = Company::all()->sort();
         // sortDesc rikiuoja pagal id mazejimo TVarka
@@ -63,8 +64,8 @@ class CompanyController extends Controller
 
         // $_GET/$_POST => $request
 
-        $collumnName = $request->collumnname; // ''
-        $sortby = $request->sortby; // ''
+        $collumnName = $request->collumnname; // 'po formos patvirinimo jie yra gauti'
+        $sortby = $request->sortby; // 'po formos patvirtinimo jie yra gaut'
 
         if(!$collumnName && !$sortby ) {
             $collumnName = 'id';
