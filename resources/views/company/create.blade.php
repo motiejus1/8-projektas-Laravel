@@ -52,10 +52,11 @@
                             <label for="title" class="col-md-4 col-form-label text-md-right">{{ __('Title') }}</label>
 
                             <div class="col-md-6">
-                                <input id="title" type="text" class="form-control @error('title') is-invalid @enderror " name="title" autofocus>
+                                <input id="title" type="text" class="form-control @error('title') is-invalid @enderror " value="{{ old('title') }}" name="title" autofocus>
                                 @error('title')
                                     <span role="alert" class="invalid-feedback">
-                                        <strong>*{{$message}}</strong>
+                                        {{-- <strong>*{{$message}}</strong> --}}
+                                        <img src=""/>
                                     </span>
                                 @enderror
                             </div>
@@ -65,7 +66,8 @@
                             <label for="description" class="col-md-4 col-form-label text-md-right">{{ __('Description') }}</label>
 
                             <div class="col-md-6">
-                                <input id="description" type="text" class="form-control @error('description') is-invalid @enderror" name="description" autofocus>
+                                <input id="description" type="text" class="form-control @error('description') is-invalid @enderror" name="description" value="{{ old('description') }}" autofocus>
+
                                 @error('description')
                                     <span role="alert" class="invalid-feedback">
                                         <strong>*{{$message}}</strong>
@@ -78,8 +80,14 @@
                             <label for="logo" class="col-md-4 col-form-label text-md-right">{{ __('Logo') }}</label>
 
                             <div class="col-md-6">
-                                <input id="logo" type="file" class="form-control" name="file">
+                                <input id="logo" type="file" class="form-control @error('logo') is-invalid @enderror" name="logo">
+                                @error('logo')
+                                <span role="alert" class="invalid-feedback">
+                                    <strong>*{{$message}}</strong>
+                                </span>
+                            @enderror
                             </div>
+
                         </div>
 
                         <div class="form-group row">
@@ -92,6 +100,79 @@
                                     @endforeach
                                 </select>
                             </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="number" class="col-md-4 col-form-label text-md-right">{{ __('Number') }}</label>
+
+                            <div class="col-md-6">
+                                <input type="text" class="form-control @error('number') is-invalid @enderror" name="number"/>
+                                @error('number')
+                                <span role="alert" class="invalid-feedback">
+                                    <strong>*{{$message}}</strong>
+                                </span>
+                            @enderror
+                            </div>
+
+
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="number" class="col-md-4 col-form-label text-md-right">{{ __('Qty') }}</label>
+
+                            <div class="col-md-6">
+                                <input type="number" class="form-control @error('qty') is-invalid @enderror" name="qty"/>
+                                @error('qty')
+                                <span role="alert" class="invalid-feedback">
+                                    <strong>*{{$message}}</strong>
+                                </span>
+                            @enderror
+                            </div>
+
+
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="max_qty" class="col-md-4 col-form-label text-md-right">{{ __('Max Qty') }}</label>
+
+                            <div class="col-md-6">
+                                <input type="number" class="form-control @error('max_qty') is-invalid @enderror" name="max_qty"/>
+                                @error('max_qty')
+                                <span role="alert" class="invalid-feedback">
+                                    <strong>*{{$message}}</strong>
+                                </span>
+                            @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="start_date" class="col-md-4 col-form-label text-md-right">{{ __('Startdate') }}</label>
+
+                            <div class="col-md-6">
+                                <input type="datetime-local" class="form-control @error('start_date') is-invalid @enderror" name="start_date"/>
+                                @error('start_date')
+                                <span role="alert" class="invalid-feedback">
+                                    <strong>*{{$message}}</strong>
+                                </span>
+                            @enderror
+                            </div>
+
+
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="end_date" class="col-md-4 col-form-label text-md-right">{{ __('Enddate') }}</label>
+
+                            <div class="col-md-6">
+                                <input type="datetime-local" class="form-control @error('end_date') is-invalid @enderror" name="end_date"/>
+                                @error('end_date')
+                                <span role="alert" class="invalid-feedback">
+                                    <strong>*{{$message}}</strong>
+                                </span>
+                            @enderror
+                            </div>
+
+
                         </div>
 
 

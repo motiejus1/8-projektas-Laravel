@@ -104,10 +104,42 @@ class CompanyController extends Controller
 
         $company = new Company;
 
+        // Pavadinimas yra privalomas ir turi buti unikalus, kiek simboliu leisti ivesti
+        // Neturi leisti prideti iraso su tokiu pat pavadinimu, jei jis yra randamas, duomenu bazeje
+
+        //  3. Task redagavime ir pridėjime uždėti tikrinimą,
+        // kad pabaigos data(end_date) nebūtų ansktesnė nei pradžios(start_date).
+
+
+        // if($end_date > $start_date ) - pabaigos data po pradzios datos(after)
+        //if ($start_date < $endate) - pradzios data yra pries pabaigos data(before)
+
+        //after:
+        //before:
+
+
+        //paint
+        //paveiksliuko tipas
+
+        //jpg, png, gif ...
+
         $validateVar = $request->validate([
-            'title' => 'required',
-            'description' => 'required', //uzpildytas
-            'type_id' => 'required'
+            // 'title' => 'required|min:6|unique:companies',
+                // 'title' => ['required', 'min:6', 'unique:companies'],
+                // 'description' => 'required|min:6|max:50',
+                // 'number' => 'numeric|integer' //ar tai yra skaicius, ir jis yra sveikasis
+                // 'number' => 'digits:3', // 1. jinai patikrina ar tai yra skaicius 2. ar skaicius turi 3 skaitmenis
+                // 'logo' => 'image|mimes:jpg,jpeg',
+                //kaip leisti ikelti tik lankomumo ataskaitos formata?
+                'logo' => 'file|max:2048', //kai max funkcija yra naudoja su file, skaicius reiskia dydi kilobaitais
+                'number' => 'digits_between:1,3',
+                'qty' => 'numeric|gte:max_qty',// gt - greater than qty > 0; gte = qty >=0
+                                        // lt - less tahn qty < skaicius, lte = qty <= skaicius
+                'max_qty' => 'numeric',
+                'start_date' => 'required|date', //required|date|before:end_date
+                'end_date' => 'required|date|after:start_date',
+                //uzpildytas
+            // 'type_id' => 'required'
         ]);
 
         // veikia ifas: validate funkcija nutraukia store funkcijos  veikima
