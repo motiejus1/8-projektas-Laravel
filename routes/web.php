@@ -21,8 +21,8 @@ Route::prefix('companies')->group(function () {
 
     Route::get('','CompanyController@index')->name('company.index');
     Route::get('search', 'CompanyController@search')->name('company.search');
-    // Route::get('create', 'BookController@create')->name('book.create');
-    // Route::post('store', 'BookController@store')->name('book.store');
+    Route::get('create', 'CompanyController@create')->name('company.create');
+    Route::post('store', 'CompanyController@store')->name('company.store');
     // Route::get('edit/{book}', 'BookController@edit')->name('book.edit');
     // Route::post('update/{book}', 'BookController@update')->name('book.update');
     // Route::post('delete/{book}', 'BookController@destroy' )->name('book.destroy');
@@ -33,7 +33,7 @@ Route::prefix('companies')->group(function () {
 Route::prefix('types')->group(function () {
 
     Route::get('','TypeController@index')->name('type.index');
-    // Route::get('create', 'AuthorController@create')->name('author.create');
+    // Route::get('create', 'TypeController@create')->name('type.create');
     // Route::post('store', 'AuthorController@store')->name('author.store');
     // Route::get('edit/{author}', 'AuthorController@edit')->name('author.edit');
     // Route::post('update/{author}', 'AuthorController@update')->name('author.update');

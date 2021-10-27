@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Company;
+use App\Type;
 use Illuminate\Http\Request;
 
 class CompanyController extends Controller
@@ -86,7 +87,8 @@ class CompanyController extends Controller
      */
     public function create()
     {
-        //
+        $types = Type::all();
+        return view("company.create",["types"=>$types]);
     }
 
     /**
@@ -97,7 +99,30 @@ class CompanyController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //iterpimas i duomenu baze
+        //man bande i duomenu baze sukelti netinkamus ar tuscius duomenis
+
+        $company = new Company;
+
+        $validateVar = $request->validate([
+            'title' => 'required',
+            'description' => 'required', //uzpildytas
+            'type_id' => 'required'
+        ]);
+
+        // veikia ifas: validate funkcija nutraukia store funkcijos  veikima
+        // jeigu ivyksta klaida: duomenys apie klaida yra patalpinami i $errors kintamaji
+        //$errors kintamasis savyje turi 0 erroru
+
+        $company->title = $request->title;
+        $company->description = $request->description;
+        $company->logo = "https://paveiksliukas.lt";
+        $company->type_id = $request->type_id;
+
+        $company->save();
+
+        return redirect()->route("company.index");
+
     }
 
     /**
@@ -183,9 +208,15 @@ class CompanyController extends Controller
         // WHERE type_id > 16 AND type_id < 150
         // $companies = Company::all()->where("type_id",">=", 16)->where("type_id","<=", 150);
 
+        // SELECT * FROM COmpany WHERE 1
+        //filtruojama kompaniju kolekcija
+
         //WHERE type_id = 151 OR type_id = 152
 
         // $companies = Company::query()->where("type_id", 151)->orWhere("type_id", 152)->get();
+
+        // SELECT * FROM Company WHERE
+        // type_id = 151 OR type_id = 152
 
 
         //SELECT * FROM companies
