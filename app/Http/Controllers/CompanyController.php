@@ -102,6 +102,10 @@ class CompanyController extends Controller
         //iterpimas i duomenu baze
         //man bande i duomenu baze sukelti netinkamus ar tuscius duomenis
 
+        $types = Type::all();
+
+        $type_count = $types->count(); // 200
+
         $company = new Company;
 
         // Pavadinimas yra privalomas ir turi buti unikalus, kiek simboliu leisti ivesti
@@ -124,7 +128,11 @@ class CompanyController extends Controller
         //jpg, png, gif ...
 
         $validateVar = $request->validate([
-            // 'title' => 'required|min:6|unique:companies',
+
+                //neleisti ivesti specialiuju simboliu:
+                // 'title' => 'required|min:6|unique:companies|alpha_num', //leidzia ivesti tik abezeles raides
+
+                'title' => 'required|min:6|unique:companies|regex:/^[a-zA-Z0-9]+$/u',// a-z A-Z 0-9
                 // 'title' => ['required', 'min:6', 'unique:companies'],
                 // 'description' => 'required|min:6|max:50',
                 // 'number' => 'numeric|integer' //ar tai yra skaicius, ir jis yra sveikasis
@@ -138,6 +146,10 @@ class CompanyController extends Controller
                 'max_qty' => 'numeric',
                 'start_date' => 'required|date', //required|date|before:end_date
                 'end_date' => 'required|date|after:start_date',
+                'textarea_description' => 'required|min:6|max:50',
+                'type_id' => 'numeric|integer|lte:'.$type_count,
+                // regex - speciali sintakse ieskoti tekste tam tikru pasikartojanciu pattern
+                'test_checkbox' => 'accepted'// checkbox yra 1/0 true/false kad laukelis yra privalomas
                 //uzpildytas
             // 'type_id' => 'required'
         ]);

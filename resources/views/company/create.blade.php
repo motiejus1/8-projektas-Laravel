@@ -52,7 +52,7 @@
                             <label for="title" class="col-md-4 col-form-label text-md-right">{{ __('Title') }}</label>
 
                             <div class="col-md-6">
-                                <input id="title" type="text" class="form-control @error('title') is-invalid @enderror " value="{{ old('title') }}" name="title" autofocus>
+                                <input id="title" type="text" class="form-control @error('title') is-invalid @enderror " value="{{ old('title') }}" name="title" required autofocus>
                                 @error('title')
                                     <span role="alert" class="invalid-feedback">
                                         {{-- <strong>*{{$message}}</strong> --}}
@@ -175,8 +175,27 @@
 
                         </div>
 
+                        <div class="form-group row">
+                            <label for="textarea_description" class="col-md-4 col-form-label text-md-right">{{ __('Textareadescription') }}</label>
+                            <div class="col-md-6">
+                                <textarea class="form-control summernote" name="textarea_description">
+                                </textarea>
 
+                                @error('textarea_description')
+                                    <span role="alert" class="invalid-feedback">
+                                        <strong>*{{$message}}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
 
+                        <div class="form-group row">
+                            <label for="textarea_description" class="col-md-4 col-form-label text-md-right">{{ __('test_checkbox') }}</label>
+
+                            {{-- 1/0 true/false --}}
+                            {{-- value/0 value/false  --}}
+                            <input type="checkbox" name="test_checkbox" value="value" required/>
+                        </div>
 
                         <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-4">
@@ -191,4 +210,10 @@
         </div>
     </div>
 </div>
+
+<script>
+    $(document).ready(function() {
+        $('.summernote').summernote();
+    });
+</script>
 @endsection
