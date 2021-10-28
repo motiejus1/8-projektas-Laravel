@@ -50,7 +50,7 @@ class ClientController extends Controller
      */
     public function show(Client $client)
     {
-        //
+        return view("client.show", ["client"=> $client]);
     }
 
     /**
@@ -85,6 +85,23 @@ class ClientController extends Controller
     public function destroy(Client $client)
     {
         //
+    }
+
+    public function generateClientPDF(Client $client) {
+        //jis mums duoda specifinio kliento informacija pagal id
+          //1. Pasiimti  duomenis apie klienta
+        // 2. panaudoti pdf biblioteka
+        // 3. sugeneruoti atsisiuntimo nuoroda
+
+
+        view()->share('client', $client);
+
+        //sukurti kita pdf template
+        $pdf = PDF::loadView("pdf_client_template", $client);
+
+        return $pdf->download("client".$client->id.".pdf");
+
+        //return $client->id;
     }
 
     public function generatePDF() {

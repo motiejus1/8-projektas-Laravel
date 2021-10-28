@@ -9,6 +9,7 @@
             <th>Surname</th>
             <th>Phone</th>
             <th>Email</th>
+            <th>Actions</th>
         </tr>
         @foreach ($clients as $client)
             <tr>
@@ -17,6 +18,11 @@
                 <td> {{$client->surname }}</td>
                 <td> {{$client->phone }}</td>
                 <td> {{$client->email }}</td>
+                <td>
+                    <a href="{{route('client.show',[$client])}}" class="btn btn-secondary">
+                        Show
+                    </a>
+                </td>
             </tr>
         @endforeach
     </table>
