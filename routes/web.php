@@ -42,6 +42,19 @@ Route::prefix('types')->group(function () {
 
 });
 
+Route::prefix('clients')->group(function () {
+
+    Route::get('','ClientController@index')->name('client.index');
+    Route::get('/pdf', 'ClientController@generatePDF')->name('client.pdf');
+    // Route::get('create', 'TypeController@create')->name('type.create');
+    // Route::post('store', 'AuthorController@store')->name('author.store');
+    // Route::get('edit/{author}', 'AuthorController@edit')->name('author.edit');
+    // Route::post('update/{author}', 'AuthorController@update')->name('author.update');
+    // Route::post('delete/{author}', 'AuthorController@destroy' )->name('author.destroy');
+    // Route::get('show/{author}', 'AuthorController@show')->name('author.show');
+
+});
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
